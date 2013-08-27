@@ -1,19 +1,8 @@
 ///<Reference path="IDestructable.ts" />
 module uifx {
 
-    var addEventListener = window.addEventListener ?
-        (el: Element, event: string, handler: (any) => any) => el.addEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).attachEvent(event, handler);
-
-    var removeEventListener = window.removeEventListener ?
-        (el: Element, event: string, handler: (any) => any) => el.removeEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).detachEvent(event, handler);
-
-    function bind(func, scope) {
-        return () => func.apply(scope, arguments);
-    }
-
     export class Component implements IDestructable {
+
         private el: Element;
         private components: ComponentDictionary;
         private componentInstances: ComponentInstanceDictionary;
@@ -114,6 +103,17 @@ module uifx {
             this.componentInstances = null;
         }
     }
+
+    var addEventListener = window.addEventListener ?
+        (el: Element, event: string, handler: (any) => any) => el.addEventListener(event, handler, false) :
+        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).attachEvent(event, handler);
+
+    var removeEventListener = window.removeEventListener ?
+        (el: Element, event: string, handler: (any) => any) => el.removeEventListener(event, handler, false) :
+        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).detachEvent(event, handler);
+
+    var bind = (func, scope) =>
+        () => func.apply(scope, arguments);
 
     export interface EventHandlerDictionary {
         [selector: string]: {
