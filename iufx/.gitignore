@@ -1,2 +1,6 @@
 bin
 obj
+*.js
+*.map
+*.csproj.user
+*.suo
