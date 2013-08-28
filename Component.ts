@@ -75,7 +75,7 @@ module uifx {
         }
 
         public destroy() {
-            this.destroyComponent();
+            this.destroyComponents();
             this.unbindEventHandlers();
         }
 
@@ -90,7 +90,7 @@ module uifx {
             }
         }
 
-        private destroyComponent() {
+        private destroyComponents() {
             for (var selector in this.componentInstances) {
                 if (this.components.hasOwnProperty(selector)) {
                     var instances = this.componentInstances[selector];
