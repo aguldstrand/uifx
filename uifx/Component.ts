@@ -6,14 +6,14 @@ module uifx {
         private el: Element;
         private components: ComponentDictionary;
         private componentInstances: ComponentInstanceDictionary;
-        private boundHandlers: { el: Element; event: string; handler: (e: any) => any; }[];
+        private boundHandlers: { el: Element; event: string; handler: (e: any) => any; capture: boolean;}[];
 
         constructor(
             el: Element,
             private template: (model: any) => string,
             private eventHandlers: EventHandlerDictionary) {
 
-            this.el = el || document;
+            this.el = el || window.document.body;
             this.components = {};
             this.componentInstances = null;
         }
@@ -64,9 +64,10 @@ module uifx {
                                 this.boundHandlers.push({
                                     el: el,
                                     event: handlerInfo.event,
-                                    handler: handler
+                                    handler: handler,
+                                    capture:handlerInfo.capture
                                 });
-                                addEventListener(el, handlerInfo.event, handler);
+                                addEventListener(el, handlerInfo.event, handler, !!handlerInfo.capture);
                             }
                         }
                     }
@@ -84,7 +85,7 @@ module uifx {
                 var len = this.boundHandlers.length;
                 for (var i = 0; i < len; i++) {
                     var boundHandler = this.boundHandlers[i];
-                    removeEventListener(boundHandler.el, boundHandler.event, boundHandler.handler);
+                    removeEventListener(boundHandler.el, boundHandler.event, boundHandler.handler, boundHandler.capture);
                 }
                 this.boundHandlers = null;
             }
@@ -105,12 +106,12 @@ module uifx {
     }
 
     var addEventListener = window.addEventListener ?
-        (el: Element, event: string, handler: (e: any) => any) => el.addEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (e: any) => any) => (<HTMLElement>el).attachEvent(event, handler);
+        (el: Element, event: string, handler: (e: any) => any, capture: boolean) => el.addEventListener(event, handler, capture) :
+        (el: Element, event: string, handler: (e: any) => any, capture: boolean) => (<HTMLElement>el).attachEvent(event, handler);
 
     var removeEventListener = window.removeEventListener ?
-        (el: Element, event: string, handler: (e: any) => any) => el.removeEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (e: any) => any) => (<HTMLElement>el).detachEvent(event, handler);
+        (el: Element, event: string, handler: (e: any) => any, capture: boolean) => el.removeEventListener(event, handler, capture) :
+        (el: Element, event: string, handler: (e: any) => any, capture: boolean) => (<HTMLElement>el).detachEvent(event, handler);
 
     var bind = (func, scope) =>
         () => func.apply(scope, arguments);
@@ -118,8 +119,9 @@ module uifx {
     export interface EventHandlerDictionary {
         [selector: string]: {
             event: string;
-            lockLevel?: number;
             handler: (e: any) => any;
+            lockLevel?: number;
+            capture?: boolean;
         }[];
     }
 

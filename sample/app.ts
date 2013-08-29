@@ -4,14 +4,17 @@ module sample {
         constructor() {
             super({
                 '.kiwi': [{
-                    event: 'mouseMove',
-                    handler: this.onKiwiMouseMove
+                    event: 'click',
+                    handler: this.onKiwiClick,
+                    capture: true
                 }]
             });
         }
 
-        onKiwiMouseMove(any: any): any {
-            document.write('kiwi ');
+        onKiwiClick(e: Event): any {
+            e.preventDefault();
+            document.body.appendChild(document.createTextNode("kiwi "));
+            return false;
         }
     }
 
