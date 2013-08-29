@@ -1,0 +1,11 @@
+﻿body
+{
+    font-family: 'Segoe UI', sans-serif
+}
+
+.kiwi {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: red;
+}

@@ -6,7 +6,7 @@ module uifx {
         private el: Element;
         private components: ComponentDictionary;
         private componentInstances: ComponentInstanceDictionary;
-        private boundHandlers: { el: Element; event: string; handler: (any) => any; }[];
+        private boundHandlers: { el: Element; event: string; handler: (e: any) => any; }[];
 
         constructor(
             el: Element,
@@ -63,7 +63,7 @@ module uifx {
                                 var handler = bind(handlerInfo.handler, this);
                                 this.boundHandlers.push({
                                     el: el,
-                                    event:handlerInfo.event,
+                                    event: handlerInfo.event,
                                     handler: handler
                                 });
                                 addEventListener(el, handlerInfo.event, handler);
@@ -105,12 +105,12 @@ module uifx {
     }
 
     var addEventListener = window.addEventListener ?
-        (el: Element, event: string, handler: (any) => any) => el.addEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).attachEvent(event, handler);
+        (el: Element, event: string, handler: (e: any) => any) => el.addEventListener(event, handler, false) :
+        (el: Element, event: string, handler: (e: any) => any) => (<HTMLElement>el).attachEvent(event, handler);
 
     var removeEventListener = window.removeEventListener ?
-        (el: Element, event: string, handler: (any) => any) => el.removeEventListener(event, handler, false) :
-        (el: Element, event: string, handler: (any) => any) => (<HTMLElement>el).detachEvent(event, handler);
+        (el: Element, event: string, handler: (e: any) => any) => el.removeEventListener(event, handler, false) :
+        (el: Element, event: string, handler: (e: any) => any) => (<HTMLElement>el).detachEvent(event, handler);
 
     var bind = (func, scope) =>
         () => func.apply(scope, arguments);
@@ -118,8 +118,8 @@ module uifx {
     export interface EventHandlerDictionary {
         [selector: string]: {
             event: string;
-            lockLevel: number;
-            handler: (any) => any;
+            lockLevel?: number;
+            handler: (e: any) => any;
         }[];
     }
 

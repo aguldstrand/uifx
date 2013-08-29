@@ -5,11 +5,15 @@ module uifx {
         }
 
         public execute(input: any) {
-            this.lockModel.lock(this.lockLevel);
+            if (this.lockModel) {
+                this.lockModel.lock(this.lockLevel);
+            }
         }
 
         public complete(error: any, result: any) {
-            this.lockModel.unlock(this.lockLevel);
+            if (this.lockModel) {
+                this.lockModel.unlock(this.lockLevel);
+            }
         }
     }
 }
