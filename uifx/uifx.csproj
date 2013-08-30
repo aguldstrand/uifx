@@ -20,6 +20,7 @@
     <TypeScriptCompile Include="Command.ts" />
     <TypeScriptCompile Include="Component.ts" />
     <TypeScriptCompile Include="Event.ts" />
+    <TypeScriptCompile Include="IErrorModel.ts" />
     <TypeScriptCompile Include="IDestructable.ts" />
     <TypeScriptCompile Include="ILockModel.ts" />
     <TypeScriptCompile Include="Service.ts" />

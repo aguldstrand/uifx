@@ -1,7 +1,8 @@
+///<Reference path="IErrorModel.ts" />
 ///<Reference path="ILockModel.ts" />
 module uifx {
     export class Command {
-        constructor(private timeout: number, private lockLevel: number, private lockModel: ILockModel) {
+        constructor(private timeout: number, private lockLevel: number, private lockModel: ILockModel, private errorModel: IErrorModel) {
         }
 
 
@@ -12,7 +13,7 @@ module uifx {
             if (this.timeout) {
                 var timerHandle = setTimeout(() => {
                     canceled = true;
-                    this.unlock();
+                    this.complete("command timeout", null);
                 }, this.timeout);
             }
 
@@ -25,6 +26,11 @@ module uifx {
         }
 
         public complete(err, data) {
+
+            if (err) {
+                this.errorModel.handleError(err);
+            }
+
             this.completeImpl(err, data);
             this.unlock();
         }
