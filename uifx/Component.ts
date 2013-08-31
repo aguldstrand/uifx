@@ -3,10 +3,10 @@ module uifx {
 
     export class Component implements IDestructable {
 
-        private el: Element;
+        public el: Element;
         private components: ComponentDictionary;
         private componentInstances: ComponentInstanceDictionary;
-        private boundHandlers: { el: Element; event: string; handler: (e: any) => any; capture: boolean;}[];
+        private boundHandlers: { el: Element; event: string; handler: (e: any) => any; capture: boolean; }[];
 
         constructor(
             el: Element,
@@ -69,12 +69,12 @@ module uifx {
                             var handlerInfoLen = handlerInfos.length;
                             for (var j = 0; j < handlerInfoLen; j++) {
                                 var handlerInfo = handlerInfos[j];
-                                var handler = bind(handlerInfo.handler, this);
+                                var handler = bind(handlerInfo.handler(this), this);
                                 this.boundHandlers.push({
                                     el: el,
                                     event: handlerInfo.event,
                                     handler: handler,
-                                    capture:handlerInfo.capture
+                                    capture: handlerInfo.capture
                                 });
                                 addEventListener(el, handlerInfo.event, handler, !!handlerInfo.capture);
                             }
@@ -132,7 +132,7 @@ module uifx {
     export interface EventHandlerDictionary {
         [selector: string]: {
             event: string;
-            handler: (e: any) => any;
+            handler: (c: any) => any;
             lockLevel?: number;
             capture?: boolean;
         }[];

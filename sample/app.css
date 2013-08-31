@@ -9,6 +9,7 @@
     height: 200px;
     background: red;
     margin: 10px;
+    overflow: hidden;
 
     position: relative;
 }
@@ -19,12 +20,19 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    position: absolute;
+
+    -moz-transition: left ease-in .2s;
+    -o-transition: left ease-in .2s;
+    -webkit-transition: left ease-in .2s;
+    transition: left ease-in .2s;
 }
 
 .carousel-item {
     width: 20%;
     height: 100%;
     float: left;
+    position: relative;
 }
 
 .carousel-item-heading {
