@@ -18,9 +18,19 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="default.htm" />
+    <Content Include="img\img1.jpg" />
+    <Content Include="img\img4.jpg" />
+    <Content Include="img\img3.jpg" />
+    <Content Include="img\img2.jpg" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\c1.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\c2.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,8 +23,15 @@ module uifx {
         }
 
         public initialize() {
+            this.render();
             this.initComponents();
             this.bindEventHandlers();
+        }
+
+        private render() {
+            if (this.template) {
+                (<HTMLElement>this.el).innerHTML = this.template(this.getTemplateData());
+            }
         }
 
         private initComponents() {
@@ -38,7 +45,9 @@ module uifx {
                     var len = elements.length;
                     for (var i = 0; i < len; i++) {
                         var el = elements[i];
-                        instances.push(new ctor(<Element>(el)));
+                        var component = new ctor(<Element>(el));
+                        instances.push(component);
+                        component.initialize();
                     }
                 }
             }
@@ -102,6 +111,10 @@ module uifx {
                 }
             }
             this.componentInstances = null;
+        }
+
+        public getTemplateData() {
+            throw 'Not implemented';
         }
     }
 

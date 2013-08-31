@@ -1,0 +1,7 @@
+﻿[{
+	img:'img1.jpg',
+	heading:'Image heading 1'
+}, {
+	img:'img2.jpg',
+	heading:'Image heading 2'
+}]
