@@ -1,0 +1,19 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family: 'Segoe UI', sans-serif;
+    background: #444;
+    color: white;
+}
+
+.success {
+    background: rgb(0, 200, 0);
+}
+
+.fail {
+    background: rgb(200, 0, 0);
+}

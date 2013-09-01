@@ -42,6 +42,9 @@
 
     width: 50%;
     margin: 10px;
+    padding: 4px;
+
+    background: #ff006e;
 }
 
 .carousel-item-image {

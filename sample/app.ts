@@ -1,5 +1,6 @@
 ///<Reference path="../uifx/Application.ts" />
 ///<Reference path="../externals/mustache.ts/mustache.ts/mustache.ts" />
+///<Reference path="appTemplate.ts" />
 module sample {
     class App extends uifx.Application {
         constructor() {
@@ -21,14 +22,12 @@ module sample {
         private static handlers = {
             '.carousel-item-list': [{
                 event: 'click',
-                handler: c=> c.nextSlide
+                handler: c => c.nextSlide
             }]
         };
 
         constructor(el: Element) {
-            super(el,
-                Mustache.compile('<ul class="carousel-item-list">{{#.}}<li class="carousel-item"><img class="carousel-item-image" src="{{img}}" /><span class="carousel-item-heading">{{heading}}</span></li>{{/.}}</ul>'),
-                Carousel.handlers);
+            super(el, Mustache.compile(appTemplate), Carousel.handlers);
         }
 
         nextSlide() {
