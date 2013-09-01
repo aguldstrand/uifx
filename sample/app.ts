@@ -1,6 +1,5 @@
 ///<Reference path="../uifx/Application.ts" />
-///<Reference path="../externals/mustache.ts/mustache.ts/mustache.ts" />
-///<Reference path="appTemplate.ts" />
+///<Reference path="Carousel.ts" />
 module sample {
     class App extends uifx.Application {
         constructor() {
@@ -16,44 +15,6 @@ module sample {
         }
     }
 
-    class Carousel extends uifx.Component {
-        private slide = 0;
-
-        private static handlers = {
-            '.carousel-item-list': [{
-                event: 'click',
-                handler: c => c.nextSlide
-            }]
-        };
-
-        constructor(el: Element) {
-            super(el, Mustache.compile(appTemplate), Carousel.handlers);
-        }
-
-        nextSlide() {
-            this.slide = (this.slide + 1) % 5;
-            (<HTMLElement>this.el.firstElementChild).style.left = -(this.slide * 100) + '%';
-        }
-
-        getTemplateData() {
-            return [{
-                img: 'img1.jpg',
-                heading: 'Image heading 1'
-            }, {
-                img: 'img1.jpg',
-                heading: 'Image heading 1'
-            }, {
-                img: 'img1.jpg',
-                heading: 'Image heading 1'
-            }, {
-                img: 'img1.jpg',
-                heading: 'Image heading 1'
-            }, {
-                img: 'img2.jpg',
-                heading: 'Image heading 2'
-            }];
-        }
-    }
 
     var app = window['sampleApp'] = new App();
     app.initialize();

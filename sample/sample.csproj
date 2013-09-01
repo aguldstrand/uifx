@@ -24,7 +24,8 @@
     <Content Include="img\img2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="App.ts" />
+    <TypeScriptCompile Include="Carousel.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\c1.json" />
@@ -33,7 +34,7 @@
     <Content Include="data\c2.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.tpl" />
+    <Content Include="Carousel.tpl" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

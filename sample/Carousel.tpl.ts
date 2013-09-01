@@ -1,4 +1,4 @@
-module sample { export var appTemplate = [
+module sample { export var carouselTemplate = [
   "<ul class=\"carousel-item-list\">\r\n",
   {
     "plugin": "standard-iterator",

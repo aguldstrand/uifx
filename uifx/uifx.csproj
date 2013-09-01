@@ -24,6 +24,7 @@
     <TypeScriptCompile Include="IDestructable.ts" />
     <TypeScriptCompile Include="ILockModel.ts" />
     <TypeScriptCompile Include="Service.ts" />
+    <TypeScriptCompile Include="util\HttpRequest.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
